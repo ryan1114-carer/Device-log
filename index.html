@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>裝置紀錄</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: white;
+      color: #000;
+    }
+    .note {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .controls {
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .checkbox-group, .select-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .checkbox-group label {
+      white-space: nowrap;
+    }
+    .log-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 300px;
+      margin-top: 10px;
+    }
+  </style>
+  <meta name="google" content="notranslate">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const userLang = navigator.language || navigator.userLanguage;
+      const script = document.createElement('script');
+      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.head.appendChild(script);
+
+      window.googleTranslateElementInit = function() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'zh-TW',
+          includedLanguages: userLang.split('-')[0],
+          autoDisplay: true
+        });
+      };
+    });
+  </script>
+</head>
+<body>
+  <div class="note">在網址中加入查詢間距的參數，設定自動重新整理網頁的時間：chrome://device-log/?refresh=&lt;秒數&gt;</div>
+
+  <div class="controls">
+    <button>重新整理</button>
+    <button>清除</button>
+
+    <label>記錄層級：
+      <select>
+        <option>錯誤</option>
+        <option>使用者</option>
+        <option>活動</option>
+        <option>偵錯</option>
+      </select>
+    </label>
+
+    <label><input type="checkbox" />檔案資訊</label>
+    <label><input type="checkbox" />詳細時間戳記</label>
+  </div>
+
+  <div class="checkbox-group">
+    <button id="cancel">取消勾選類型</button>
+    <label><input type="checkbox" class="type-checkbox" />藍牙</label>
+    <label><input type="checkbox" class="type-checkbox" />攝像機</label>
+    <label><input type="checkbox" class="type-checkbox" />顯示設定</label>
+    <label><input type="checkbox" class="type-checkbox" />擴充功能</label>
+    <label><input type="checkbox" class="type-checkbox" />FIDO</label>
+    <label><input type="checkbox" class="type-checkbox" />韌體</label>
+    <label><input type="checkbox" class="type-checkbox" />地理位置</label>
+    <label><input type="checkbox" class="type-checkbox" />HID</label>
+    <label><input type="checkbox" class="type-checkbox" />登入</label>
+    <label><input type="checkbox" class="type-checkbox" />網路</label>
+    <label><input type="checkbox" class="type-checkbox" />電源</label>
+    <label><input type="checkbox" class="type-checkbox" />印表機</label>
+    <label><input type="checkbox" class="type-checkbox" />序列</label>
+    <label><input type="checkbox" class="type-checkbox" />USB</label>
+  </div>
+
+  <div class="note">在網址中新增查詢參數，以便在網頁嵌入時選取類型，例如 chrome://device-log/?types=Bluetooth,USB</div>
+
+  <div class="log-box">沒有記錄項目</div>
+
+  <script>
+    document.getElementById("cancel").addEventListener("click", function() {
+      document.querySelectorAll(".type-checkbox").forEach(cb => cb.checked = false);
+    });
+  </script>
+</body>
+</html>
+             
